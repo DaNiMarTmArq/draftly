@@ -1,0 +1,26 @@
+{
+  "name": "draftly",
+  "version": "1.0.0",
+  "description": "Draftly es un sencillo y potente servicio web que permite a autores crear, editar y gestionar sus publicaciones con facilidad.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "dev": "npx tsc --watch",
+    "start": "node ./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaNiMarTmArq/Draftly.git"
+  },
+  "author": "Daniel Martinez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaNiMarTmArq/Draftly/issues"
+  },
+  "homepage": "https://github.com/DaNiMarTmArq/Draftly#readme",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
