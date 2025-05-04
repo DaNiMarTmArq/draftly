@@ -1,26 +1,16 @@
 import { Author } from "../domain/author";
 import { AuthorResponse } from "./dtos/authorresponse";
 import { NewAuthorRequest } from "./dtos/newauthor";
+import {
+  AuthorAlreadyExistsError,
+  AuthorCreationError,
+} from "./errors/authorerrors";
 import { AuthorRepository } from "./repositories/authorrespository";
-
-export class AuthorAlreadyExistsError extends Error {
-  constructor(fullName: string) {
-    super(`Author with name "${fullName}" already exists`);
-    this.name = "AuthorAlreadyExistsError";
-  }
-}
-
-export class AuthorCreationError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "AuthorCreationError";
-  }
-}
 
 export class CreateAuthor {
   constructor(private authorRepository: AuthorRepository) {}
 
-  async execute(author: NewAuthorRequest) {
+  async execute(author: NewAuthorRequest): Promise<AuthorResponse> {
     const { fullName, email, imageURL } = author;
 
     const existingAuthor = await this.authorRepository.getAuthorByName(

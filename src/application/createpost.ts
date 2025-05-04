@@ -1,21 +1,8 @@
 import { Post } from "../domain/post";
 import { NewPostRequest } from "./dtos/newpost";
+import { AuthorNotFoundError, PostSaveError } from "./errors/posterrors";
 import { AuthorRepository } from "./repositories/authorrespository";
 import { PostRepository } from "./repositories/postrepository";
-
-export class AuthorNotFoundError extends Error {
-  constructor(authorId: string) {
-    super(`No author found with id: ${authorId}`);
-    this.name = "AuthorNotFoundError";
-  }
-}
-
-export class PostSaveFailedError extends Error {
-  constructor() {
-    super("Failed to save post");
-    this.name = "PostSaveFailedError";
-  }
-}
 
 export class CreatePost {
   constructor(
@@ -34,7 +21,7 @@ export class CreatePost {
     try {
       await this.postRepository.savePost(newPost);
     } catch (error: any) {
-      throw new PostSaveFailedError();
+      throw new PostSaveError();
     }
 
     return newPost;
