@@ -1,18 +1,14 @@
 import { Post } from "./post";
+import { randomUUID, UUID } from "crypto";
 
 export class Author {
-  private authorId: string;
+  private authorId: UUID;
   private name: string;
   private email: string;
   private imageURL: string;
 
-  constructor(
-    authorId: string,
-    name: string,
-    email: string,
-    imageURL: string = ""
-  ) {
-    this.authorId = authorId;
+  constructor(name: string, email: string, imageURL: string = "") {
+    this.authorId = randomUUID();
     this.name = name;
     this.email = email;
     this.imageURL = imageURL;

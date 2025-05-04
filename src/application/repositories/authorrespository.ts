@@ -1,5 +1,6 @@
 import { Author } from "../../domain/author";
 
 export interface AuthorRepository {
-  getAuthorById(authorId: string): Promise<Author | null>;
+  getAuthorById(id: string): Promise<Author | null>;
+  getAuthorByName(name: string): Promise<Author | null>;
 }

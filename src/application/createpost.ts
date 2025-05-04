@@ -24,10 +24,10 @@ export class CreatePost {
   ) {}
 
   async execute(post: NewPostRequest): Promise<Post> {
-    const { title, body, category, authorId } = post;
-    const author = await this.authorRepository.getAuthorById(authorId);
+    const { title, body, category, authorName } = post;
+    const author = await this.authorRepository.getAuthorByName(authorName);
 
-    if (!author) throw new AuthorNotFoundError(authorId);
+    if (!author) throw new AuthorNotFoundError(authorName);
 
     const newPost = author.writePost(title, body, category);
 
