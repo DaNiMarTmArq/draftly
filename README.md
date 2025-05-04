@@ -7,5 +7,5 @@
 - 📝 API RESTful para crear, editar y recuperar publicaciones de blog  
 - 🧑‍💻 Registro de autores para empezar a escribir en minutos  
 - 🗃️ Gestión de posts por autor: cada usuario controla su contenido  
-- 🔐 Autenticación básica para proteger el acceso a las funcionalidades  
+- 🔐 Sin Autenticación
 - ⚡ Ideal como backend para aplicaciones de blogging personalizadas
