@@ -19,7 +19,7 @@ export class GetPosts {
     return PostMapper.toDto(post);
   }
 
-  async allPosts(): Promise<PostDto[]> {
+  async getAllPosts(): Promise<PostDto[]> {
     try {
       const posts = await this.postRepository.getAll();
       return this.buildPostListResponse(posts);
