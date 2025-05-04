@@ -1,6 +1,4 @@
-import { Author } from "../../domain/author";
 import { Post } from "../../domain/post";
-import { NewPostRequest } from "../dtos/newpost";
 import { PostDto } from "../dtos/postdto";
 import { AuthorMapper } from "./authormapper";
 
