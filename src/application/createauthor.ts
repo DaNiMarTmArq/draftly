@@ -1,18 +1,18 @@
 import { Author } from "../domain/author";
-import { AuthorResponse } from "./dtos/authorresponse";
+import { AuthorDto } from "./dtos/authordto";
 import { NewAuthorRequest } from "./dtos/newauthor";
 import {
   AuthorAlreadyExistsError,
   AuthorCreationError,
 } from "./errors/authorerrors";
+import { AuthorMapper } from "./mappers/authormapper";
 import { AuthorRepository } from "./repositories/authorrespository";
 
 export class CreateAuthor {
   constructor(private authorRepository: AuthorRepository) {}
 
-  async execute(author: NewAuthorRequest): Promise<AuthorResponse> {
-    const { fullName, email, imageURL } = author;
-
+  async execute(author: NewAuthorRequest): Promise<AuthorDto> {
+    const fullName = author.fullName;
     const existingAuthor = await this.authorRepository.getAuthorByName(
       fullName
     );
@@ -20,20 +20,13 @@ export class CreateAuthor {
       throw new AuthorAlreadyExistsError(fullName);
     }
 
-    const newAuthor = new Author(fullName, email, imageURL ?? "");
+    const newAuthor = AuthorMapper.fromNewAuthorRequest(author);
     try {
       await this.authorRepository.save(newAuthor);
-
-      const response: AuthorResponse = {
-        authorId: newAuthor.getAuthorId(),
-        fullName,
-        email,
-        imageURL: imageURL ?? "",
-      };
-
-      return response;
     } catch (error: any) {
       throw new AuthorCreationError("Failed to save new author");
     }
+
+    return AuthorMapper.toDto(newAuthor);
   }
 }

@@ -1,6 +1,7 @@
-import { Post } from "../domain/post";
 import { NewPostRequest } from "./dtos/newpost";
+import { PostDto } from "./dtos/postdto";
 import { AuthorNotFoundError, PostSaveError } from "./errors/posterrors";
+import { PostMapper } from "./mappers/postmapper";
 import { AuthorRepository } from "./repositories/authorrespository";
 import { PostRepository } from "./repositories/postrepository";
 
@@ -10,7 +11,7 @@ export class CreatePost {
     private authorRepository: AuthorRepository
   ) {}
 
-  async execute(post: NewPostRequest): Promise<Post> {
+  async execute(post: NewPostRequest): Promise<PostDto> {
     const { title, body, category, authorName } = post;
     const author = await this.authorRepository.getAuthorByName(authorName);
 
@@ -24,6 +25,6 @@ export class CreatePost {
       throw new PostSaveError();
     }
 
-    return newPost;
+    return PostMapper.toDto(newPost);
   }
 }
