@@ -1,10 +1,3 @@
-export class AuthorNotFoundError extends Error {
-  constructor(authorId: string) {
-    super(`No author found with id: ${authorId}`);
-    this.name = "AuthorNotFoundError";
-  }
-}
-
 export class PostSaveError extends Error {
   constructor() {
     super("Failed to save post");
@@ -16,5 +9,12 @@ export class PostsReadError extends Error {
   constructor() {
     super("Failed to read posts");
     this.name = "PostsReadError";
+  }
+}
+
+export class PostNotFoundError extends Error {
+  constructor(postId: string) {
+    super(`Post with Id ${postId} not found`);
+    this.name = "PostNotFoundError";
   }
 }

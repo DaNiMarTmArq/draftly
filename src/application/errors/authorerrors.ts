@@ -11,3 +11,10 @@ export class AuthorCreationError extends Error {
     this.name = "AuthorCreationError";
   }
 }
+
+export class AuthorNotFoundError extends Error {
+  constructor(authorId: string) {
+    super(`No author found with id: ${authorId}`);
+    this.name = "AuthorNotFoundError";
+  }
+}
