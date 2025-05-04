@@ -1,14 +1,25 @@
-import { Post } from "./post.js";
+import { Post } from "./post";
 
 export class Author {
+  private authorId: string;
   private name: string;
   private email: string;
   private imageURL: string;
 
-  constructor(name: string, email: string, imageURL: string) {
+  constructor(
+    authorId: string,
+    name: string,
+    email: string,
+    imageURL: string = ""
+  ) {
+    this.authorId = authorId;
     this.name = name;
     this.email = email;
     this.imageURL = imageURL;
+  }
+
+  public getAuthorId(): string {
+    return this.authorId;
   }
 
   public getName(): string {
@@ -36,6 +47,6 @@ export class Author {
   }
 
   public writePost(title: string, content: string, category: string): Post {
-    return new Post(title, content, new Date(), category, this);
+    return new Post(title, content, { name: category }, this);
   }
 }

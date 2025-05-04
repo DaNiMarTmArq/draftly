@@ -1,33 +1,44 @@
-import { Author } from "./author.js";
+import { Author } from "./author";
+import { randomUUID, UUID } from "crypto";
+
+interface Category {
+  name: string;
+}
 
 export class Post {
+  private postId: UUID;
   private title: string;
-  private description: string;
+  private body: string;
   private creationDate: Date;
   private lastModificationDate: Date;
-  private category: string;
+  private category: Category;
   private author: Author;
 
   constructor(
     title: string,
     description: string,
-    creationDate: Date,
-    category: string,
-    author: Author
+    category: Category,
+    author: Author,
+    creationDate: Date = new Date()
   ) {
+    this.postId = randomUUID();
     this.title = title;
-    this.description = description;
+    this.body = description;
     this.creationDate = creationDate;
     this.category = category;
     this.author = author;
     this.lastModificationDate = creationDate;
   }
 
+  public getPostId(): UUID {
+    return this.postId;
+  }
+
   public getLastModificationDate(): Date {
     return this.lastModificationDate;
   }
 
-  public setLastModificationDate(date: Date): void {
+  public updateModificationDate(date: Date): void {
     this.lastModificationDate = date;
   }
 
@@ -35,27 +46,27 @@ export class Post {
     return this.title;
   }
 
-  public setTitle(title: string): void {
+  public updateTitle(title: string): void {
     this.title = title;
   }
 
-  public getDescription(): string {
-    return this.description;
+  public getBody(): string {
+    return this.body;
   }
 
-  public setDescription(description: string): void {
-    this.description = description;
+  public updatebody(body: string): void {
+    this.body = body;
   }
 
   public getCreationDate(): Date {
     return this.creationDate;
   }
 
-  public getCategory(): string {
+  public getCategory(): Category {
     return this.category;
   }
 
-  public setCategory(category: string): void {
+  public setCategory(category: Category): void {
     this.category = category;
   }
 
