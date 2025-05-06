@@ -7,8 +7,13 @@ export class Author {
   private email: string;
   private imageURL: string;
 
-  constructor(name: string, email: string, imageURL: string) {
-    this.authorId = randomUUID();
+  constructor(
+    name: string,
+    email: string,
+    imageURL: string,
+    authorId = randomUUID()
+  ) {
+    this.authorId = authorId;
     this.name = name;
     this.email = email;
     this.imageURL = imageURL;

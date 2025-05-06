@@ -13,17 +13,23 @@ export class CreateAuthor {
 
   async execute(author: NewAuthorRequest): Promise<AuthorDto> {
     const fullName = author.fullName;
-    const existingAuthor = await this.authorRepository.getAuthorByName(
-      fullName
-    );
+
+    let existingAuthor: Author | null;
+    try {
+      existingAuthor = await this.authorRepository.getAuthorByName(fullName);
+    } catch (error) {
+      throw new AuthorCreationError("Failed to check existing author");
+    }
+
     if (existingAuthor) {
       throw new AuthorAlreadyExistsError(fullName);
     }
 
     const newAuthor = AuthorMapper.fromNewAuthorRequest(author);
+
     try {
       await this.authorRepository.save(newAuthor);
-    } catch (error: any) {
+    } catch (error) {
       throw new AuthorCreationError("Failed to save new author");
     }
 

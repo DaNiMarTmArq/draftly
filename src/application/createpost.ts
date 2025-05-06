@@ -1,6 +1,8 @@
 import { NewPostRequest } from "./dtos/newpost";
 import { PostDto } from "./dtos/postdto";
-import { AuthorNotFoundError, PostSaveError } from "./errors/posterrors";
+import { AuthorNotFoundError } from "./errors/authorerrors";
+import { PostSaveError } from "./errors/posterrors";
+
 import { PostMapper } from "./mappers/postmapper";
 import { AuthorRepository } from "./repositories/authorrespository";
 import { PostRepository } from "./repositories/postrepository";
