@@ -20,15 +20,17 @@ export class Post {
     description: string,
     category: Category,
     author: Author,
-    creationDate: Date = new Date()
+    creationDate: Date = new Date(),
+    lastModificationDate: Date = new Date(),
+    postId = randomUUID()
   ) {
-    this.postId = randomUUID();
+    this.postId = postId;
     this.title = title;
     this.body = description;
     this.creationDate = creationDate;
     this.category = category;
     this.author = author;
-    this.lastModificationDate = creationDate;
+    this.lastModificationDate = lastModificationDate;
   }
 
   public getPostId(): UUID {
