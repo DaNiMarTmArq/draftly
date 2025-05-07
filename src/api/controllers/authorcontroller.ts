@@ -6,18 +6,23 @@ import {
   AuthorAlreadyExistsError,
   AuthorCreationError,
 } from "../../application/errors/authorerrors";
+import { Validator } from "../validators/validator";
 
 export class AuthorController {
-  constructor(private createUseCase: CreateAuthor) {}
+  constructor(
+    private createUseCase: CreateAuthor,
+    private authorDtoValidator: Validator<NewAuthorRequest>
+  ) {}
 
   async createAuthor(req: Request, res: Response) {
-    //Validate incoming DTO
-    const { fullName, email, imageURL } = req.body;
-    const createReq: NewAuthorRequest = {
-      fullName: fullName as string,
-      email: email as string,
-      imageURL: imageURL ?? "",
-    };
+    let createReq: NewAuthorRequest;
+    try {
+      createReq = this.authorDtoValidator.validate(req.body);
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json(error);
+      return;
+    }
+
     let newAuthor;
     try {
       newAuthor = await this.createUseCase.execute(createReq);
