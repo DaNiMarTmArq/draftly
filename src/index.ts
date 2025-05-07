@@ -1,3 +1,5 @@
+import "./env.config";
+
 import app from "./api/app";
 
 const PORT = process.env.PORT;

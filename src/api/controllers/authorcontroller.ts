@@ -15,6 +15,7 @@ export class AuthorController {
   ) {}
 
   async createAuthor(req: Request, res: Response) {
+    console.log(req.body);
     let createReq: NewAuthorRequest;
     try {
       createReq = this.authorDtoValidator.validate(req.body);
