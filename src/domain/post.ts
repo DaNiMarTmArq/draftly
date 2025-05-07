@@ -1,7 +1,8 @@
 import { Author } from "./author";
 import { randomUUID, UUID } from "crypto";
 
-interface Category {
+export interface Category {
+  id: number;
   name: string;
 }
 
@@ -64,6 +65,10 @@ export class Post {
 
   public getCategory(): Category {
     return this.category;
+  }
+
+  public getCategoryName(): string {
+    return this.category.name;
   }
 
   public setCategory(category: Category): void {

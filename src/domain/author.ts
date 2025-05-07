@@ -1,4 +1,4 @@
-import { Post } from "./post";
+import { Category, Post } from "./post";
 import { randomUUID, UUID } from "crypto";
 
 export class Author {
@@ -47,7 +47,7 @@ export class Author {
     this.imageURL = imageURL;
   }
 
-  public writePost(title: string, content: string, category: string): Post {
-    return new Post(title, content, { name: category }, this);
+  public writePost(title: string, content: string, category: Category): Post {
+    return new Post(title, content, category, this);
   }
 }

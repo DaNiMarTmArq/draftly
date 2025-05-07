@@ -1,6 +1,6 @@
 export interface NewPostRequest {
   title: string;
   body: string;
-  category: string;
+  categoryName: string;
   authorName: string;
 }
