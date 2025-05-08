@@ -18,3 +18,10 @@ export class AuthorNotFoundError extends Error {
     this.name = "AuthorNotFoundError";
   }
 }
+
+export class AuthorReadError extends Error {
+  constructor() {
+    super("Failed to read authors");
+    this.name = "AuthorReadErrors";
+  }
+}

@@ -7,20 +7,24 @@ import {
   AuthorCreationError,
 } from "../../application/errors/authorerrors";
 import { Validator } from "../validators/validator";
+import { ZodError } from "zod";
+import { GetAuthors } from "../../application/getauthors";
 
 export class AuthorController {
   constructor(
     private createUseCase: CreateAuthor,
+    private getUseCase: GetAuthors,
     private authorDtoValidator: Validator<NewAuthorRequest>
   ) {}
 
   async createAuthor(req: Request, res: Response) {
-    console.log(req.body);
     let createReq: NewAuthorRequest;
     try {
       createReq = this.authorDtoValidator.validate(req.body);
     } catch (error) {
-      res.status(HttpStatus.BAD_REQUEST).json(error);
+      if (error instanceof ZodError) {
+        res.status(HttpStatus.BAD_REQUEST).json(error.issues);
+      }
       return;
     }
 
@@ -28,18 +32,28 @@ export class AuthorController {
     try {
       newAuthor = await this.createUseCase.execute(createReq);
     } catch (error) {
+      if (error instanceof AuthorAlreadyExistsError) {
+        res.status(HttpStatus.BAD_REQUEST).json({
+          error: error.message,
+        });
+        return;
+      }
+
       if (error instanceof AuthorCreationError) {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
           error: error.message,
         });
-        if (error instanceof AuthorAlreadyExistsError) {
-          res.status(HttpStatus.BAD_REQUEST).json({
-            error: error.message,
-          });
-        }
+        return;
       }
     }
 
     res.status(HttpStatus.CREATED).json(newAuthor);
+    return;
+  }
+
+  async getAllAuthors(req: Request, res: Response) {
+    const authors = await this.getUseCase.getAllAuthors();
+    res.status(HttpStatus.OK).json(authors);
+    return;
   }
 }

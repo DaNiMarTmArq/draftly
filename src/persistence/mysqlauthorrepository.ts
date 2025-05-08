@@ -19,6 +19,12 @@ const authorFieldMap: Record<QueryField, string> = {
 export class MySQLAuthorRepository implements AuthorRepository {
   constructor(private dbManager: DatabaseManager) {}
 
+  async getAllAuthors(): Promise<Author[]> {
+    const query = `SELECT * FROM authors`;
+    const authorRows = await this.dbManager.query<AuthorModel>(query);
+    return authorRows.map(this.mapRowToAuthorEntity);
+  }
+
   async getAuthorById(id: string): Promise<Author | null> {
     return this.getAuthorBy("id", id);
   }
@@ -48,7 +54,11 @@ export class MySQLAuthorRepository implements AuthorRepository {
 
     if (results.length < 1) return null;
 
-    const { idauthors, name, email, image_url } = results[0];
+    return this.mapRowToAuthorEntity(results[0]);
+  }
+
+  private mapRowToAuthorEntity(row: AuthorModel): Author {
+    const { idauthors, name, email, image_url } = row;
     return new Author(name, email, image_url ?? "", idauthors);
   }
 }

@@ -1,6 +1,7 @@
-import express from "express";
+import express, { ErrorRequestHandler, NextFunction } from "express";
 import { DatabaseManager } from "../persistence/dbmanager";
 import authorRouter from "./routes/authorroutes";
+import { HttpStatus } from "./constants/httpstatus";
 
 const app = express();
 
@@ -20,5 +21,20 @@ app.get("/", (request, response) => {
   console.log(response);
   response.status(200).send("Hello World");
 });
+
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  const statusCode =
+    err.status || err.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
+  const message = err.message || "Internal Server Error";
+
+  res.status(statusCode).json({
+    error: {
+      message,
+      ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+    },
+  });
+};
+
+app.use(errorHandler);
 
 export default app;
