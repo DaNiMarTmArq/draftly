@@ -27,7 +27,7 @@ export class CreateAuthor {
     );
 
     author.fullName = formattedName;
-    const newAuthor = AuthorMapper.fromNewAuthorRequest(author);
+    const newAuthor = AuthorMapper.toEntity(author);
 
     try {
       await this.authorRepository.save(newAuthor);

@@ -12,7 +12,7 @@ export class AuthorMapper {
     };
   }
 
-  public static fromNewAuthorRequest(req: NewAuthorRequest): Author {
+  public static toEntity(req: NewAuthorRequest): Author {
     return new Author(req.fullName, req.email, req.imageURL ?? "");
   }
 }
