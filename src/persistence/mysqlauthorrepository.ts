@@ -9,11 +9,12 @@ interface AuthorModel extends RowDataPacket {
   email: string;
   image_url: string | null;
 }
-type QueryField = "id" | "name";
+type QueryField = "id" | "name" | "email";
 
 const authorFieldMap: Record<QueryField, string> = {
   id: "idauthors",
   name: "name",
+  email: "email",
 };
 
 export class MySQLAuthorRepository implements AuthorRepository {
@@ -30,6 +31,10 @@ export class MySQLAuthorRepository implements AuthorRepository {
   }
   async getAuthorByName(name: string): Promise<Author | null> {
     return this.getAuthorBy("name", name);
+  }
+
+  async getAuthorByEmail(email: string): Promise<Author | null> {
+    return this.getAuthorBy("email", email);
   }
   async save(author: Author): Promise<void> {
     const query = `

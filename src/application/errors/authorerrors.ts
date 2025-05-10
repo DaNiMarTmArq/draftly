@@ -1,6 +1,8 @@
 export class AuthorAlreadyExistsError extends Error {
-  constructor(fullName: string) {
-    super(`Author with name "${fullName}" already exists`);
+  constructor(id: string, type: string) {
+    type === "name"
+      ? super(`Author with name "${id}" already exists`)
+      : super(`Author with email "${id}" already exists`);
     this.name = "AuthorAlreadyExistsError";
   }
 }
