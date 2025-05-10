@@ -32,7 +32,6 @@ export class CreateAuthor {
     try {
       await this.authorRepository.save(newAuthor);
     } catch (error) {
-      console.log(error);
       throw new AuthorCreationError("Failed to save new author");
     }
 
