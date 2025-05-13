@@ -1,7 +1,7 @@
 import { NewPostRequest } from "./dtos/newpost";
 import { PostDto } from "./dtos/postdto";
 import { AuthorNotFoundError } from "./errors/authorerrors";
-import { PostSaveError } from "./errors/posterrors";
+import { CategoryError, PostSaveError } from "./errors/posterrors";
 
 import { PostMapper } from "./mappers/postmapper";
 import { AuthorRepository } from "./repositories/authorrespository";
@@ -32,7 +32,7 @@ export class CreatePost {
         categoryName
       );
     } catch (error) {
-      throw new Error("Failed to retrieve or create category");
+      throw new CategoryError();
     }
 
     const newPost = author.writePost(title, body, categoryEntity);

@@ -18,3 +18,10 @@ export class PostNotFoundError extends Error {
     this.name = "PostNotFoundError";
   }
 }
+
+export class CategoryError extends Error {
+  constructor() {
+    super("Failed to retrieve or create category");
+    this.name = "CategoryError";
+  }
+}
