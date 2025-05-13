@@ -5,10 +5,12 @@ import { HttpStatus } from "../constants/httpstatus";
 import {
   AuthorAlreadyExistsError,
   AuthorCreationError,
+  AuthorReadError,
 } from "../../application/errors/authorerrors";
 import { Validator } from "../validators/validator";
 import { ZodError } from "zod";
 import { GetAuthors } from "../../application/getauthors";
+import { AuthorDto } from "../../application/dtos/authordto";
 
 export class AuthorController {
   constructor(
@@ -52,8 +54,17 @@ export class AuthorController {
   }
 
   async getAllAuthors(req: Request, res: Response) {
-    const authors = await this.getUseCase.getAllAuthors();
-    res.status(HttpStatus.OK).json(authors);
-    return;
+    try {
+      const authors = await this.getUseCase.getAllAuthors();
+      res.status(HttpStatus.OK).json(authors);
+      return;
+    } catch (error) {
+      if (error instanceof AuthorReadError) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+          error: error.message,
+        });
+        return;
+      }
+    }
   }
 }

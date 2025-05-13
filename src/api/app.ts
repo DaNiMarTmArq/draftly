@@ -23,7 +23,6 @@ app.get("/", (request, response) => {
 });
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  console.log(err);
   const statusCode =
     err.status || err.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
   const message = err.message || "Internal Server Error";
