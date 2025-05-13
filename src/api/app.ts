@@ -1,7 +1,7 @@
-import express, { ErrorRequestHandler, NextFunction } from "express";
+import express, { ErrorRequestHandler } from "express";
 import { DatabaseManager } from "../persistence/dbmanager";
-import authorRouter from "./routes/authorroutes";
 import { HttpStatus } from "./constants/httpstatus";
+import authorRouter from "./routes/authorroutes";
 import postRouter from "./routes/postroutes";
 
 const app = express();
@@ -14,7 +14,6 @@ DatabaseManager.initialize({
   port: process.env.DB_PORT as unknown as number,
 });
 
-const PORT = process.env.PORT;
 app.use(express.json());
 app.use("/api/authors", authorRouter);
 app.use("/api/posts", postRouter);
@@ -24,6 +23,7 @@ app.get("/", (request, response) => {
 });
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  console.log(err);
   const statusCode =
     err.status || err.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
   const message = err.message || "Internal Server Error";

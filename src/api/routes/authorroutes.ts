@@ -1,11 +1,10 @@
-import express from "express";
-import { AuthorController } from "../controllers/authorcontroller";
-import { CreateAuthor } from "../../application/createauthor";
-import { MySQLAuthorRepository } from "../../persistence/mysqlauthorrepository";
-import { DatabaseManager } from "../../persistence/dbmanager";
-import { AuthorDtoValidator } from "../validators/authordtovalidator";
-import { GetAuthors } from "../../application/getauthors";
 import { authorRepository } from "./repositoryinstances";
+import express from "express";
+import { CreateAuthor } from "../../application/createauthor";
+import { GetAuthors } from "../../application/getauthors";
+import { AuthorController } from "../controllers/authorcontroller";
+import { AuthorDtoValidator } from "../validators/authordtovalidator";
+import { DatabaseManager } from "../../persistence/dbmanager";
 
 const authorRouter = express.Router();
 

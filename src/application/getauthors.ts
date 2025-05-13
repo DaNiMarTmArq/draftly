@@ -10,6 +10,7 @@ export class GetAuthors {
       const authors = await this.authorRepository.getAllAuthors();
       return authors.map(AuthorMapper.toDto);
     } catch (error) {
+      console.log(error);
       throw new AuthorReadError();
     }
   }
