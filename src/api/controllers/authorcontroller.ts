@@ -1,21 +1,22 @@
 import { Request, Response } from "express";
+import { ZodError } from "zod";
 import { CreateAuthor } from "../../application/createauthor";
 import { NewAuthorRequest } from "../../application/dtos/newauthor";
-import { HttpStatus } from "../constants/httpstatus";
 import {
   AuthorAlreadyExistsError,
   AuthorCreationError,
   AuthorReadError,
 } from "../../application/errors/authorerrors";
-import { Validator } from "../validators/validator";
-import { ZodError } from "zod";
 import { GetAuthors } from "../../application/getauthors";
-import { AuthorDto } from "../../application/dtos/authordto";
+import { HttpStatus } from "../constants/httpstatus";
+import { Validator } from "../validators/validator";
+import { GetPosts } from "../../application/getposts";
 
 export class AuthorController {
   constructor(
     private createUseCase: CreateAuthor,
     private getUseCase: GetAuthors,
+    private getPostsUseCase: GetPosts,
     private authorDtoValidator: Validator<NewAuthorRequest>
   ) {}
 
@@ -66,5 +67,18 @@ export class AuthorController {
         return;
       }
     }
+  }
+  async getAuthor(req: Request, res: Response) {
+    const { authorId } = req.params;
+    const author = await this.getUseCase.getSingle(authorId);
+    res.status(HttpStatus.OK).json(author);
+    return;
+  }
+
+  async getAuthorWithPosts(req: Request, res: Response) {
+    const { authorId } = req.params;
+    const authorPosts = await this.getPostsUseCase.allPostsByAuthor(authorId);
+    res.status(HttpStatus.OK).json(authorPosts);
+    return;
   }
 }
