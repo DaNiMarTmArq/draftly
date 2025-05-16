@@ -28,11 +28,11 @@ export class GetPosts {
     }
   }
 
-  async allPostsByAuthor(authorName: string): Promise<PostDto[]> {
-    const author = await this.authorRepository.getAuthorByName(authorName);
-    if (!author) throw new AuthorNotFoundError(authorName);
+  async allPostsByAuthor(authorId: string): Promise<PostDto[]> {
+    const author = await this.authorRepository.getAuthorById(authorId);
+    if (!author) throw new AuthorNotFoundError(authorId);
 
-    const posts = await this.postRepository.getByAuthor(authorName);
+    const posts = await this.postRepository.getByAuthorId(authorId);
     return this.buildPostListResponse(posts);
   }
 

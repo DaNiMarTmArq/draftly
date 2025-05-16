@@ -72,7 +72,7 @@ export class MySQLPostRepository implements PostRepository {
           p.author_id, 
           a.name AS author_name, a.email AS author_email, a.image_url AS author_image_url,
           p.category_id, 
-          c.name AS category_name
+          c.category_name AS category_name
       FROM
           posts p
       JOIN
@@ -91,7 +91,7 @@ export class MySQLPostRepository implements PostRepository {
           p.author_id,
           a.name AS author_name, a.email AS author_email, a.image_url AS author_image_url,
           p.category_id,
-          c.name AS category_name
+          c.category_name AS category_name
       FROM
           posts p
       JOIN
@@ -108,14 +108,14 @@ export class MySQLPostRepository implements PostRepository {
     return this.mapRowToPost(rows[0]);
   }
 
-  async getByAuthor(authorName: string): Promise<Post[]> {
+  async getByAuthorId(authorId: string): Promise<Post[]> {
     const query = `
       SELECT
           p.idposts, p.title, p.description, p.creation_date, p.modified_at,
           p.author_id,
           a.name AS author_name, a.email AS author_email, a.image_url AS author_image_url,
           p.category_id,
-          c.name AS category_name
+          c.category_name AS category_name
       FROM
           posts p
       JOIN
@@ -123,9 +123,9 @@ export class MySQLPostRepository implements PostRepository {
       JOIN
           categories c ON p.category_id = c.idcategories
       WHERE
-          a.name = ?;
+          a.idauthors = ?;
     `;
-    const rows = await this.dbManager.query<PostRowData>(query, [authorName]);
+    const rows = await this.dbManager.query<PostRowData>(query, [authorId]);
     return rows.map((row) => this.mapRowToPost(row));
   }
 }

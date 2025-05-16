@@ -9,10 +9,12 @@ import {
   CategoryError,
   PostSaveError,
 } from "../../application/errors/posterrors";
+import { GetPosts } from "../../application/getposts";
 
 export class PostController {
   constructor(
     private createPostUseCase: CreatePost,
+    private getPostsUseCase: GetPosts,
     private postValidator: Validator<NewPostRequest>
   ) {}
 
@@ -46,6 +48,19 @@ export class PostController {
     }
 
     res.status(HttpStatus.CREATED).json(newPost);
+    return;
+  }
+
+  async getAllPosts(req: Request, res: Response) {
+    const posts = await this.getPostsUseCase.getAllPosts();
+    res.status(HttpStatus.OK).json(posts);
+    return;
+  }
+
+  async getSinglePost(req: Request, res: Response) {
+    const { postId } = req.params;
+    const post = await this.getPostsUseCase.getSinglePost(postId);
+    res.status(HttpStatus.OK).json(post);
     return;
   }
 }
