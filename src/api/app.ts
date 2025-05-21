@@ -1,8 +1,6 @@
 import express, { ErrorRequestHandler } from "express";
 import { DatabaseManager } from "../persistence/dbmanager";
 import { HttpStatus } from "./constants/httpstatus";
-import authorRouter from "./routes/authorroutes";
-import postRouter from "./routes/postroutes";
 import router from "./routes/routes.index";
 
 const app = express();
