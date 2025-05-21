@@ -1,11 +1,10 @@
-import { authorRepository, postRepository } from "./repositoryinstances";
 import express from "express";
 import { CreateAuthor } from "../../application/createauthor";
 import { GetAuthors } from "../../application/getauthors";
+import { GetPosts } from "../../application/getposts";
 import { AuthorController } from "../controllers/authorcontroller";
 import { AuthorDtoValidator } from "../validators/authordtovalidator";
-import { DatabaseManager } from "../../persistence/dbmanager";
-import { GetPosts } from "../../application/getposts";
+import { authorRepository, postRepository } from "./repositoryinstances";
 
 const authorRouter = express.Router();
 
