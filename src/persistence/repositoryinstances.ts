@@ -1,7 +1,7 @@
-import { DatabaseManager } from "../../persistence/dbmanager";
-import { MySQLAuthorRepository } from "../../persistence/mysqlauthorrepository";
-import { MySQLCategoryRepository } from "../../persistence/mysqlcategoryrepository";
-import { MySQLPostRepository } from "../../persistence/mysqlpostrepository";
+import { DatabaseManager } from "./dbmanager";
+import { MySQLAuthorRepository } from "./mysqlauthorrepository";
+import { MySQLCategoryRepository } from "./mysqlcategoryrepository";
+import { MySQLPostRepository } from "./mysqlpostrepository";
 
 DatabaseManager.initialize({
   user: process.env.DB_USER,

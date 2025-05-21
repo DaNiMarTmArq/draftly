@@ -4,7 +4,10 @@ import { GetAuthors } from "../../application/getauthors";
 import { GetPosts } from "../../application/getposts";
 import { AuthorController } from "../controllers/authorcontroller";
 import { AuthorDtoValidator } from "../validators/authordtovalidator";
-import { authorRepository, postRepository } from "./repositoryinstances";
+import {
+  authorRepository,
+  postRepository,
+} from "../../persistence/repositoryinstances";
 
 const authorRouter = express.Router();
 

@@ -7,7 +7,7 @@ import {
   authorRepository,
   categoryRepository,
   postRepository,
-} from "./repositoryinstances";
+} from "../../persistence/repositoryinstances";
 
 const postRouter = express.Router();
 
