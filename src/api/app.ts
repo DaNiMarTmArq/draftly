@@ -1,10 +1,14 @@
 import express, { ErrorRequestHandler } from "express";
+import swaggerUi from "swagger-ui-express";
 import { HttpStatus } from "./constants/httpstatus";
 import router from "./routes/routes.index";
 import { AuthorNotFoundError } from "../application/errors/authorerrors";
 import { PostNotFoundError } from "../application/errors/posterrors";
+import { swaggerSpec } from "../swagger";
 
 const app = express();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.json());
 app.use("/api", router);
