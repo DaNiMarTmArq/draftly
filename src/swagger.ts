@@ -39,6 +39,38 @@ const swaggerDefinition = {
         },
         required: ["authorId", "fullName", "email", "imageURL"],
       },
+      Post: {
+        type: "object",
+        properties: {
+          postId: {
+            type: "string",
+            format: "uuid",
+            example: "9a8f6b40-3f92-4b1e-bc21-d4a7cf65c930",
+          },
+          title: {
+            type: "string",
+            example: "How to Use Clean Architecture in Node.js",
+          },
+          body: {
+            type: "string",
+            example:
+              "In this post, we will explore how to implement Clean Architecture in a Node.js backend...",
+          },
+          creationDate: { type: "string", format: "date-time" },
+          lastModificationDate: { type: "string", format: "date-time" },
+          category: { type: "string", example: "Backend Development" },
+          author: { $ref: "#/components/schemas/Author" },
+        },
+        required: [
+          "postId",
+          "title",
+          "body",
+          "creationDate",
+          "lastModificationDate",
+          "category",
+          "author",
+        ],
+      },
     },
   },
 };
