@@ -2,6 +2,22 @@
 
 **Draftly** es un sencillo y potente servicio web que permite a autores crear, editar y gestionar sus publicaciones con facilidad.
 
+# Tabla de Contenidos
+
+- [Características principales](#características-principales)
+- [Cómo iniciar el proyecto](#cómo-iniciar-el-proyecto)
+  - [1. Clona el repositorio](#1-clona-el-repositorio)
+  - [2. Instala las dependencias](#2-instala-las-dependencias)
+  - [3. Configura las variables de entorno](#3-configura-las-variables-de-entorno)
+  - [4. Inicializa la base de datos](#4-inicializa-la-base-de-datos)
+  - [5. Compila el proyecto](#5-compila-el-proyecto)
+  - [6. Inicia el servidor](#6-inicia-el-servidor)
+- [⚙️ Detalles técnicos](#️-detalles-técnicos)
+  - [🧱 Clean Architecture](#-clean-architecture)
+  - [🐬 Base de datos con mysql2](#-base-de-datos-con-mysql2)
+  - [📘 Documentación con Swagger](#-documentación-con-swagger)
+  - [✅ Validación con Zod](#-validación-con-zod)
+
 ## Características principales
 
 - 📝 API RESTful para crear, editar y recuperar publicaciones de blog
