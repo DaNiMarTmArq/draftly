@@ -54,7 +54,7 @@ npm start
 ```
 
 El servidor se iniciará por defecto en `http://localhost:3000`.
-En la ruta `api-docs` dispones de la documentación Swagger con todas las rutas disponibles.
+En la ruta `/api-docs` dispones de la documentación Swagger con todas las rutas disponibles.
 
 ---
 
@@ -63,3 +63,28 @@ Si prefieres trabajar en modo desarrollo con recompilación automática:
 ```bash
 npm run dev
 ```
+
+## ⚙️ Detalles técnicos
+
+Draftly ha sido desarrollado siguiendo principios de diseño modernos. Aquí se detallan algunos aspectos técnicos del proyecto:
+
+### 🧱 Clean Architecture
+
+El proyecto está estructurado siguiendo **Clean Architecture**, lo que asegura una separación clara de responsabilidades. Las principales capas son:
+
+- **Domain**: contiene las entidades y reglas esenciales.
+- **Application**: define los casos de uso y ejecuta la lógica principal.
+- **API**: expone la interfaz HTTP mediante Express.
+- **Persistence**: gestiona la interacción con la base de datos.
+
+### 🐬 Base de datos con mysql2
+
+El proyecto utiliza el paquete `mysql2` como driver para conectarse y realizar operaciones sobre una base de datos MySQL. La configuración se define a través de variables de entorno.
+
+### 📘 Documentación con Swagger
+
+Se incluye documentación de la API utilizando **Swagger**. Esto permite explorar y probar los endpoints de manera sencilla directamente desde la ruta `/api-docs`.
+
+### ✅ Validación con Zod
+
+Para validar los datos que envia el usuario, se utiliza la librería **Zod**, que permite definir esquemas de validación en TypeScript.
