@@ -54,6 +54,7 @@ npm start
 ```
 
 El servidor se iniciará por defecto en `http://localhost:3000`.
+En la ruta `api-docs` dispones de la documentación Swagger con todas las rutas disponibles.
 
 ---
 
