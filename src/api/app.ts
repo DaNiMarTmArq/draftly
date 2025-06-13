@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api", router);
 
 app.get("/", (request, response) => {
-  response.status(200).send("Hello World");
+  response.status(301).redirect("/api-docs");
 });
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
