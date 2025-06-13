@@ -39,7 +39,7 @@ cp .env.example .env
 
 ### 4. Inicializa la base de datos
 
-Ejecuta los scripts SQL del directorio `db` en tu base de datos para crear las tablas necesarias:
+Ejecuta los scripts SQL del directorio `db` en tu base de datos para crear las tablas necesarias. En "db/db_draftly_mock.sql" dispones de datos de prueba para construir la base de datos.
 
 ### 5. Compila el proyecto
 
